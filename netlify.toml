@@ -1,0 +1,23 @@
+[build]
+  command = "pnpm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# NO [[plugins]] block — do NOT add @netlify/plugin-nextjs (breaks static-export forms)
+
+[[notifications]]
+  event = "submission_created"
+  url = "https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=sprayfoamqr.com"
+  form = "join"
+
+[[notifications]]
+  event = "submission_created"
+  url = "https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=sprayfoamqr.com"
+  form = "stickerrequest"
+
+[[notifications]]
+  event = "submission_created"
+  url = "https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=sprayfoamqr.com"
+  form = "contact"

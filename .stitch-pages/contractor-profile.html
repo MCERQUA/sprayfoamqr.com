@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contractor Profile | SprayFoamQR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#A14828', // brick-terracotta
+                            dark: '#613B2E'     // deep brick-brown
+                        },
+                        secondary: {
+                            DEFAULT: '#613B2E',
+                            dark: '#392118'
+                        },
+                        accent: {
+                            DEFAULT: '#C68B39'  // copper-gold
+                        },
+                        dark: {
+                            DEFAULT: '#2B1D14', // charcoal-brown text
+                            inverted: '#392118'
+                        },
+                        background: {
+                            DEFAULT: '#F8EDE3', // warm paper
+                            dark: '#392118'
+                        },
+                        success: {
+                            DEFAULT: '#475D3C'  // olive-sage green
+                        },
+                        neutral: {
+                            200: '#E5E5E5',
+                            500: '#737373',
+                            800: '#262626'
+                        }
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px",
+                        "12": "12px"
+                    },
+                    fontFamily: {
+                        headline: ["Manrope", "sans-serif"],
+                        display: ["Manrope", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-dark font-body antialiased min-h-screen pb-24 selection:bg-primary selection:text-white">
+<!-- JSON Component: TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-background dark:bg-[#392118] border-b border-[#613B2E]/10 dark:border-[#F8EDE3]/10">
+<div class="flex items-center gap-2">
+<!-- Wordmark image injected per prompt -->
+<img alt="SprayFoamQR Wordmark" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UHOQPvMllol8WivIm5Lw9tIype2JubUoq1rEkJcw6NyGMNTK28jrq3sDGekxh750q2fpYNHepyvm2_VWhlsMibfKjV4ZBt1RNSTpDdv3pb68v2pbkher84y_TFRT61sPFtv5CNlCpmDxDSKKnPnHfp-mUu-mZIw07HuqkfPNC3XY7LE3m5KbvsJ9QwYt6iJASONr4GyAKBnUycEdQ6jV6pJiAITUWgldZC__K0a9-KAgQQwuGyglyBRqU"/>
+</div>
+<a class="flex items-center gap-2 text-primary dark:text-[#C68B39] font-label font-bold text-sm hover:bg-[#613B2E]/5 dark:hover:bg-[#F8EDE3]/5 p-2 rounded-12 transition-colors" href="tel:8005550199">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">call</span>
+<span class="tracking-wider uppercase text-xs">(800) 555-0199</span>
+</a>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-4 max-w-md mx-auto">
+<!-- (2) Header Info -->
+<section class="mb-6">
+<h1 class="font-headline font-extrabold text-[28px] leading-tight text-dark mb-2 tracking-tight">
+                Superior Spray Foam &amp; Attic
+            </h1>
+<div class="flex flex-wrap items-center gap-4 text-sm font-label text-dark/70 font-medium">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Austin, TX</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>12 Years</span>
+</div>
+</div>
+<p class="text-xs text-dark/50 mt-2 font-label">Member since 2012</p>
+</section>
+<!-- (3) Credentials Card -->
+<section class="bg-white rounded-12 border border-primary/10 shadow-sm overflow-hidden mb-6">
+<ul class="divide-y divide-primary/10">
+<!-- Row 1: License -->
+<li class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-wider text-dark/50 font-bold mb-1">License</span>
+<strong class="font-body text-base font-semibold text-dark">TX-99283-SF</strong>
+</div>
+<div class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-200/50 text-dark/70 text-[11px] font-medium self-start sm:self-auto border border-neutral-200">
+                        Documents Provided
+                    </div>
+</li>
+<!-- Row 2: Insurance -->
+<li class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-wider text-dark/50 font-bold mb-1">General Liability</span>
+<strong class="font-body text-base font-semibold text-dark">$2M Policy Active</strong>
+</div>
+<div class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-200/50 text-dark/70 text-[11px] font-medium self-start sm:self-auto border border-neutral-200">
+                        Documents Provided
+                    </div>
+</li>
+<!-- Row 3: Certification (CONFIRMED STATE) -->
+<li class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-success/5">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-wider text-dark/50 font-bold mb-1">ABAA Certified</span>
+<strong class="font-body text-base font-semibold text-dark">Master Level</strong>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-success text-white text-[11px] font-semibold self-start sm:self-auto shadow-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                        Confirmed by CCA (Oct 24)
+                    </div>
+</li>
+<!-- Row 4: Workers Comp -->
+<li class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-wider text-dark/50 font-bold mb-1">Workers Comp</span>
+<strong class="font-body text-base font-semibold text-dark">Active Policy</strong>
+</div>
+<div class="inline-flex items-center px-2.5 py-1 rounded-full bg-neutral-200/50 text-dark/70 text-[11px] font-medium self-start sm:self-auto border border-neutral-200">
+                        Documents Provided
+                    </div>
+</li>
+</ul>
+</section>
+<!-- (4) Info Box -->
+<div class="flex items-start gap-3 bg-white/50 p-3 rounded-12 border border-primary/5 mb-8">
+<span class="material-symbols-outlined text-primary/60 mt-0.5" style="font-variation-settings: 'FILL' 0;">info</span>
+<div>
+<p class="text-sm font-medium text-dark">What do these badges mean?</p>
+<a class="text-xs text-primary font-bold hover:underline underline-offset-2" href="#">Read how this works</a>
+</div>
+</div>
+<!-- (5) Photos -->
+<section class="mb-8">
+<h2 class="font-headline font-bold text-lg text-dark mb-4 tracking-tight border-b border-primary/10 pb-2">Completed Work</h2>
+<div class="grid grid-cols-2 gap-3">
+<div class="aspect-square rounded-12 overflow-hidden bg-neutral-200">
+<img alt="Completed spray foam work example 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VMONyunar_S__cHtONYw3ePogA8EIEz99IF_T1nZIoTiMvDwsycXyuu3h78UKU08XgvGo7QzO9GPfs2LnsfoiEVSWjMC_dTJc-cOq_MQN6Ul81Oorhx4qB-BOF9Krc0v8dXZ1jQdVJOdussSUYhPXzCavltXqmM-ZBTEDbJegL6qkChhrHkH3cTwo22ZU2_CBV0w9v6Hrbe-uV33mL86aDc4s7rkS8oKLasDT6FK424YyoRkv2nhA6Kiff"/>
+</div>
+<div class="aspect-square rounded-12 overflow-hidden bg-neutral-200">
+<img alt="Completed spray foam work example 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLseFLd2BrRNT9ai9gPB8b9K8n59wfV303yaZth96-I3q2OXwstsBH4Aa0yyxPP4g7w1koxmMjEXObt3LCQbyCWh3YVqneal7ibp6TYVouOu62a2mfShkC88rKvuiQxERNzqcoaQmwjCIQTOY6hxX79FicpcI95AraRVcUNADcud0WLPxA5M2_nhDZq4I3bCCxdcaVl76f6Ee6e3--S2rAw5IzsJ8l0RFlt0Ae74DU5fLgwVnDH0Oto3I5w"/>
+</div>
+</div>
+</section>
+<!-- (6) Contact Actions -->
+<section class="grid grid-cols-2 gap-3 mb-10">
+<a class="flex items-center justify-center gap-2 bg-primary text-white py-3.5 px-4 rounded-12 font-bold shadow-md hover:bg-primary-dark transition-colors active:scale-95" href="tel:8005550199">
+<span class="material-symbols-outlined">call</span>
+                Call Now
+            </a>
+<a class="flex items-center justify-center gap-2 bg-transparent border-2 border-primary text-primary py-3.5 px-4 rounded-12 font-bold hover:bg-primary/5 transition-colors active:scale-95" href="mailto:contact@superiorsprayfoam.com">
+<span class="material-symbols-outlined">mail</span>
+                Email
+            </a>
+</section>
+<!-- (7) Footer -->
+<footer class="text-center pb-8 border-t border-primary/10 pt-6">
+<p class="text-[10px] text-dark/40 font-label max-w-[250px] mx-auto leading-relaxed">
+                Hosted by SprayFoamQR a Contractors Choice Agency directory.
+            </p>
+</footer>
+</main>
+</body></html>

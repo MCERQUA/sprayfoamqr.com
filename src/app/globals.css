@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== DESIGN TOKENS — SprayFoamQR =====
+ * Palette locked to the Stitch design system — ai/research/design-system.md
+ * Brick-terracotta + copper-gold, distinct from the amber-bronze/rust/copper/cedar
+ * palettes used on sibling foam sites this batch. Light, bright, practical/utility
+ * tone (this is a real-tool concept, not thought-leadership) — light-dominant with
+ * dark punctuation bands.
+ */
+
+@layer base {
+:root {
+  --background: 30 55% 94%;           /* #F8EDE3 warm paper */
+  --foreground: 20 30% 13%;           /* #2B1D14 charcoal-brown */
+
+  --card: 0 0% 100%;
+  --card-foreground: 20 30% 13%;
+
+  --primary: 15 58% 40%;              /* #A14828 brick-terracotta */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 15 45% 28%;            /* #613B2E deep brick-brown */
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 35 55% 50%;               /* #C68B39 copper-gold */
+  --accent-foreground: 20 30% 13%;
+
+  --sage: 100 22% 30%;                /* #475D3C olive-sage green */
+  --sage-foreground: 0 0% 100%;
+
+  --muted: 30 48% 87%;                /* #EDDECE warm sand */
+  --muted-foreground: 20 15% 38%;
+
+  --destructive: 0 74% 42%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 32 35% 82%;
+  --input: 32 35% 82%;
+  --ring: 15 58% 40%;
+
+  /* Inverted contrast band — dark punctuation band on this light-dominant site */
+  --ink: 15 40% 16%;                  /* #392118 deep brick-black */
+  --ink-foreground: 30 40% 95%;
+
+  --radius: 0.75rem;                  /* ROUND_TWELVE per Stitch design system */
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+} /* close @layer base */
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== REDUCED MOTION ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== SELECTION ===== */
+
+::selection {
+  background: hsl(var(--primary) / 0.25);
+  color: hsl(var(--foreground));
+}
+
+/* ===== SCROLLBAR ===== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.7);
+}
+
+/* ===== TOUCH TARGETS (WCAG 2.5.5 / 2.5.8) ===== */
+@layer base {
+  button,
+  [role="button"],
+  a.btn,
+  select,
+  textarea,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  .edge-tab {
+    min-height: 44px;
+  }
+
+  button.icon,
+  .btn-icon,
+  [data-icon-only] {
+    min-width: 44px;
+  }
+}
+
+/* ===== BLOG / TECHNICAL ARTICLE PROSE (no typography plugin — hand-styled, light theme) ===== */
+.post-prose {
+  color: hsl(var(--foreground) / 0.85);
+  line-height: 1.75;
+}
+.post-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: hsl(var(--foreground));
+}
+.post-prose h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--foreground));
+}
+.post-prose p {
+  margin-bottom: 1.25rem;
+}
+.post-prose ul, .post-prose ol {
+  margin: 0 0 1.25rem 1.5rem;
+}
+.post-prose li {
+  margin-bottom: 0.5rem;
+}
+.post-prose ul { list-style: disc; }
+.post-prose ol { list-style: decimal; }
+.post-prose a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.post-prose strong {
+  color: hsl(var(--foreground));
+  font-weight: 600;
+}
+.post-prose blockquote {
+  border-left: 3px solid hsl(var(--primary) / 0.5);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+  margin: 1.5rem 0;
+}

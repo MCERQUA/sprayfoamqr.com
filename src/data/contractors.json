@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "sample-profile",
+    "isDemo": true,
+    "businessName": "Sample Spray Foam Co. (Example Profile)",
+    "serviceArea": "Example Metro Area, AZ",
+    "yearsInBusiness": 8,
+    "license": {
+      "number": "SAMPLE-000000",
+      "state": "AZ",
+      "confirmedAt": null
+    },
+    "insurance": {
+      "coverageLabel": "General Liability $2M",
+      "carrierOnFile": true,
+      "confirmedAt": null
+    },
+    "certifications": [
+      { "name": "Manufacturer Applicator Certification", "issuer": "Example Manufacturer", "confirmedAt": null },
+      { "name": "SPFA Professional Certification", "issuer": "Spray Polyurethane Foam Alliance", "confirmedAt": null }
+    ],
+    "photos": [
+      "/images/hero-application-still.jpg",
+      "/images/topic-jobsite-tag.jpg"
+    ],
+    "phone": "000-000-0000",
+    "email": "example@example.com",
+    "memberSince": "2026-08-20"
+  }
+]
