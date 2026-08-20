@@ -1,0 +1,127 @@
+sprayfoamqr.com — BUILD STATUS
+Generated: 2026-08-20
+Builder: josh-desk-3@mesh
+
+DOMAIN CLASSIFICATION & PIVOT HISTORY
+Not insurance, not a content-hub thought-leadership site. This is a real trust/credentialing
+product: a public directory where spray foam contractors have a credentials profile page (license,
+insurance status, certifications, photos), and CCA mails contractors a large QR sticker for their
+work truck linking directly to that profile. A homeowner or GC scans the sticker in a driveway and
+reads the contractor's credentials in ~10 seconds before letting a crew spray chemicals in an attic.
+
+This build went through a mid-build pivot. It started as a QR-content-hub concept (thought-leadership
+about QR codes in spray foam, mirroring the VR sibling site's pattern) with real research behind it
+(Traciqo/QRWarranty/QRTRAC precedent, a documented 15%->65% warranty-registration case study,
+EZQR/SuperCheapSigns QR-marketing precedent) — that research and the images generated for it carried
+over, but Mike deprioritized/redirected the premise entirely to the real directory+profile product
+described above. A written plan (route map, public/held field split, exact badge wording, sticker-
+flow wiring) was sent to the manager for review before any scaffolding, revised once per 3 host
+refinements (fulfillment-copy-only variability, VERIFICATION_ENABLED code-path gating, contractor-
+asserted vs externally-checkable field tagging), approved, then built exactly as planned.
+
+REAL-BUSINESS-NAME CHECK (standing practice, done before the original QR-content-hub direction):
+confirmed no operating business or product uses "sprayfoamqr" or a confusingly similar name; the only
+adjacent term is "QR" as an unrelated spray-foam-product abbreviation for "Quick Rise" (Honeyfoam
+200QR/600QR, Froth-Pak QR) — site copy is careful never to conflate the two.
+
+THREE HARD RISK REQUIREMENTS — VERIFIED IN CODE, NOT JUST COPY
+1. NO RAW DOCUMENTS PUBLISHED: grepped the full src/ tree for policy-number/PDF/COI-download patterns
+   — zero hits. Every public credential (license, insurance, certifications) renders only a
+   plain-language summary line via CredentialRow; the underlying document never has a public route.
+2. NO FALSE VERIFICATION CLAIMS: src/lib/config.ts VERIFICATION_ENABLED = false. TrustBadge.tsx's
+   confirmed-badge branch is gated `if (VERIFICATION_ENABLED && confirmedAt)` — with the flag false,
+   that branch is genuinely unreachable regardless of any confirmedAt value in contractors.json, so
+   every credential on every profile renders only "Documents provided by the contractor." No
+   disabled/greyed "verified-ish" state exists anywhere in the render output. Per-claim confirmedAt
+   fields exist in the data model now (all null) so turning verification on later is a config flip +
+   populating dates, not a component rewrite.
+3. NO STICKER TIMELINE PROMISED: grepped for "business days"/"ships by"/"delivery date" patterns —
+   zero hits. STICKER_FULFILLMENT_COPY in src/lib/config.ts is the single source of truth for the
+   commitment wording, referenced identically by the confirmation-screen state AND the pre-submit
+   notice in StickerRequestForm.tsx — currently set to request-only, human-fulfilled, no ETA. Changing
+   Mike's decision later means editing that one string; form fields/webhook/flow are unaffected either way.
+
+ARCHITECTURE (per approved plan v2, no deviation)
+Static export/Netlify, no auth, no database. Contractor data: src/data/contractors.json (one record
+per contractor) + src/lib/contractors.ts (typed accessors, getListedContractors() excludes the demo
+profile from the public directory + sitemap). QR codes: build-time via scripts/generate-qr.mjs
+(qrcode npm package) → public/qr/<slug>.svg, wired into package.json as `"build": "node
+scripts/generate-qr.mjs && next build"` so it always runs before export; tested standalone and via
+full build, produces correct SVGs. Signup is NOT self-serve: /join is a Netlify form → lead webhook →
+a human authors the contractor's profile record → push → redeploy, matching the fleet's existing
+form-to-webhook pattern.
+
+FIELD SPLIT (public vs held, tagged contractor-asserted / externally-checkable / platform-generated
+per the approved plan): business name, service area, years-in-business, photos, phone/email are
+contractor-asserted and never carry a confirmed state in the data model. License, insurance, and each
+certification are externally-checkable and are the only fields eligible for confirmedAt. Member-since
+and the profile's own QR are platform-generated. HELD, never public: raw COI/insurance PDF, policy
+number, home/shipping address, underlying license-verification doc, internal review notes.
+
+ROUTES: 14 static pages (next build output, confirmed via `pnpm run build`)
+  - / (directory home — honest empty-state grid, zero real contractors listed yet)
+  - /contractors/[slug] → /contractors/sample-profile (ONE demo profile, isDemo:true, robots
+    noindex, excluded from directory grid + sitemap, banner-labeled "not a real contractor" — proves
+    the template/QR pipeline end-to-end without fabricating a real business identity)
+  - /join, /request-sticker, /how-it-works, /about, /contact, /privacy, /terms (all rewritten for
+    real PII/document-handling specifics, not generic template legal boilerplate)
+  - /blog (index) + 3 posts: why-we-never-publish-your-insurance-certificate (587w),
+    how-to-read-a-contractor-trust-profile (507w), what-confirmed-by-cca-will-mean (559w) —
+    support/product-explainer content, not the main SEO play per the plan
+  - /sitemap.xml, /robots.txt, /_not-found
+
+HOMEPAGE: directory-first, not blog-led — Hero(scan-in-driveway photo, scrim >=50%, dual-audience
+copy) + ContractorGrid(honest empty state + join CTA) + WhyThisMatters + ProcessSteps + Stats(inverted
+dark band, includes an honest "3 things never published publicly" stat) + TrustSignals + FAQ(6 Q&A
+directly addressing the badge system) + CTA + Footer.
+
+PROFILE PAGE (/contractors/[slug]) — DELIBERATELY BREAKS THE SITE'S OWN HERO PATTERN: no full-bleed
+hero image, minimal ProfileHeader instead of the full Navbar. This is the "10 seconds on a phone in a
+driveway in sunlight" page — information density above the fold mattered more than visual polish, so
+identity block + stacked credential rows with per-claim badges + a badge-legend explainer sit
+immediately below a 1-line header. Photos, contact buttons, and the profile's own QR (from
+public/qr/) follow below the fold.
+
+STITCH COVERAGE: 3 real AI-generated screens matching the ACTUAL product — directory home, mobile
+contractor profile scan-view, and the join/signup page. Project projects/18383522459904373726, design
+system assets/5016915942018088726. The 3 screens generated earlier for the discarded QR-content-hub
+premise were deleted, not reused or miscounted — verified via `ls .stitch-pages/*.html` (3 files, all
+current). Palette: brick-terracotta #A14828, deep brick-brown #613B2E, copper-gold #C68B39, deep
+brick-black #392118 dark bands, olive-sage #475D3C reserved specifically for the confirmed badge —
+distinct from every sibling foam site's palette tonight. Typography: Manrope (headline) + Public Sans
+(body) — a utility-forward pairing distinct from the other 3 sites in this batch, chosen because this
+is a practical licensing-lookup tool, not editorial or thought-leadership content.
+
+IMAGES: 12 total, 1.8MB in public/images/. 9 generated earlier for the discarded content-hub premise
+(still visually on-theme — truck/QR wrap, job-site tags, credibility, CTA band — reused directly, no
+waste). 3 generated for the actual product (hero-scan-driveway.jpg, profile-trust-badges.jpg,
+sticker-on-truck-door.jpg): first attempt via Gemini returned completely unrelated stock images
+(a frog, a landscape) ignoring the prompts, so HF was used per fallback instruction — and the
+documented `hf-inference` FLUX.1-schnell endpoint returned HTTP 410 deprecated, worked around via the
+`nscale` provider's OpenAI-style endpoint (same model). All verified as real JPEGs via `file`, warm
+brick/copper palette, realistic style, stylized non-scannable QR patterns, no fabricated logos.
+
+FORMS: contact (4-field), join (10-field business/credential submission with an explicit
+do-not-attach-sensitive-documents notice), stickerrequest (6-field + quantity) — Netlify static
+pattern (data-netlify, honeypot, AEO traffic_source+landing_url hidden fields), all three declared in
+public/__forms.html with matching field names. netlify.toml has all three webhook notifications wired
+(tenant=josh, site=sprayfoamqr.com), no plugin-nextjs.
+
+GATE RESULT: pre-deploy-content-check.sh PASS (exit 0) on first run — `git init -b main` used from the
+start per the updated BUILD-PROMPT-TEMPLATE guidance, avoiding the inherited-parent-remote crosswire
+failure hit on the sibling sprayfoamvr.com build earlier tonight. 16 own-keyword hits, remote
+correctly references the domain slug, no banned hues, no decaying scrim, 3 stitch screens across 11
+routes.
+
+BUILD: pnpm build GREEN, 14 static routes (11 indexable + demo profile noindexed + blog index +
+directory home), static export (output:'export'), next pinned 15.3.9, react/react-dom 19.2.0,
+pnpm-lock.yaml only, pnpm-workspace.yaml correct (packages: ["."]) + onlyBuiltDependencies sharp.
+Placeholder sweep: zero matches (only legitimate HTML placeholder= input hints). Hard-rule greps (raw
+document exposure, sticker timeline language) both zero-hit. git tree clean, branch main from git
+init, remote set to MCERQUA/sprayfoamqr.com (not pushed — no gh/GITHUB_TOKEN auth in this container,
+same known gap as every other site built tonight).
+
+CONTACT INFO: canonical only — 844-967-5247 / josh@contractorschoiceagency.com /
+12220 E Riggs Rd, Chandler, AZ 85249. Zero fabricated contractors, testimonials, star ratings, or
+usage statistics — the directory launches honestly empty, with exactly one profile that is
+unmistakably and permanently labeled a demo, excluded from every real user-facing listing.
