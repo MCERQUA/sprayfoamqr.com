@@ -7,7 +7,6 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  alternates: { canonical: "/" },
   title: {
     default: `${site.businessName} — Know Who's Spraying Your Attic`,
     template: `%s | ${site.businessName}`,
