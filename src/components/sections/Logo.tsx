@@ -22,7 +22,10 @@ interface LogoProps {
  * styled as a heading — so the build never ships a blank header.
  */
 export function Logo({
-  src = "/logo.png",
+  // No default: a site with no logo asset must not request one. Passing a path
+  // that 404s made every pageload fetch a missing file and flash the alt text
+  // before hydration swapped in the wordmark below.
+  src,
   alt,
   width = 160,
   height = 40,
